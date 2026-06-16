@@ -1,0 +1,10 @@
+target/
+*.class
+*.jar
+*.war
+.env
+.idea/
+*.iml
+.vscode/settings.json
+mvnw.cmd.bak
+hs_err_pid*.log
