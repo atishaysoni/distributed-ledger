@@ -24,7 +24,7 @@ public class TransactionConsumer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @KafkaListener(topics = "transactions", groupId = "ledger-consumer")
+    @KafkaListener(topics = "transactions", groupId = "ledger-consumer", concurrency = "3")
     public void consume(TransactionEvent event) {
         try {
             transactionService.transfer(

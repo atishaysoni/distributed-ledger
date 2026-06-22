@@ -42,7 +42,9 @@ services:
       retries: 10
 
   app:
-    build: .
+    build:
+      context: .
+      target: server
     ports:
       - "8080:8080"
     environment:
@@ -60,3 +62,20 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+
+  bench:
+    build:
+      context: .
+      target: bench
+    environment:
+      BASE_URL: http://app:8080
+      ACCOUNTS: 100
+      WORKERS: 50
+      DURATION_SECONDS: 20
+      INITIAL_BALANCE: 10000
+      TRANSFER_AMOUNT: 10
+    depends_on:
+      app:
+        condition: service_healthy
+    profiles:
+      - bench
